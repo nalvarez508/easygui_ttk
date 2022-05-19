@@ -18,9 +18,11 @@ except (SystemError, ValueError, ImportError):
 try:
     import tkinter as tk  # python 3
     import tkinter.font as tk_Font
+    from tkinter import ttk
 except:
     import Tkinter as tk  # python 2
     import tkFont as tk_Font
+    import ttk
 
 
 def demo_textbox():
@@ -344,7 +346,7 @@ class GUItk(object):
 
         wrap_text = not codebox
         if wrap_text:
-            self.boxFont = tk_Font.nametofont("TkTextFont")
+            self.boxFont = tk_Font.nametofont("TkDefaultFont")
             self.width_in_chars = global_state.prop_font_line_length
         else:
             self.boxFont = tk_Font.nametofont("TkFixedFont")
@@ -465,6 +467,7 @@ class GUItk(object):
             self.calc_character_width(),
             pady=self.calc_character_width(),
             wrap=tk.WORD,
+            font="TkDefaultFont"
 
         )
         self.set_msg(msg)
@@ -495,6 +498,7 @@ class GUItk(object):
             self.calc_character_width(),
             height=25,  # lines. Note: a user-set arg would be preferable to hardcoded value
             width=self.width_in_chars,   # chars of the current font
+            font=self.boxFont
         )
 
         if wrap_text:
@@ -514,12 +518,12 @@ class GUItk(object):
         self.boxRoot.bind("<Up>", self.textArea.yview_scroll(-1, tk.UNITS))
 
         # add a vertical scrollbar to the frame
-        rightScrollbar = tk.Scrollbar(
+        rightScrollbar = ttk.Scrollbar(
             self.textFrame, orient=tk.VERTICAL, command=self.textArea.yview)
         self.textArea.configure(yscrollcommand=rightScrollbar.set)
 
         # add a horizontal scrollbar to the frame
-        bottomScrollbar = tk.Scrollbar(
+        bottomScrollbar = ttk.Scrollbar(
             self.textFrame, orient=tk.HORIZONTAL, command=self.textArea.xview)
         self.textArea.configure(xscrollcommand=bottomScrollbar.set)
 
@@ -547,9 +551,9 @@ class GUItk(object):
 
     def create_cancel_button(self):
         # put the buttons in the buttonsFrame
-        self.cancelButton = tk.Button(
+        self.cancelButton = ttk.Button(
             self.buttonsFrame, takefocus=tk.YES, text="Cancel",
-            height=1, width=6)
+            width=6)
         self.cancelButton.pack(
             expand=tk.NO, side=tk.LEFT, padx='2m', pady='1m', ipady="1m",
             ipadx="2m")
@@ -562,8 +566,8 @@ class GUItk(object):
 
     def create_ok_button(self):
         # put the buttons in the buttonsFrame
-        self.okButton = tk.Button(
-            self.buttonsFrame, takefocus=tk.YES, text="OK", height=1, width=6)
+        self.okButton = ttk.Button(
+            self.buttonsFrame, takefocus=tk.YES, text="OK", width=6)
         self.okButton.pack(
             expand=tk.NO, side=tk.LEFT, padx='2m', pady='1m', ipady="1m",
             ipadx="2m")

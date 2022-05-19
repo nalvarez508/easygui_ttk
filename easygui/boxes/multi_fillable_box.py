@@ -14,8 +14,10 @@ except:
 
 try:
     import tkinter as tk  # python 3
+    from tkinter import ttk
 except:
     import Tkinter as tk  # python 2
+    import ttk
 
 # -----------------------------------------------------------------------
 # multpasswordbox
@@ -336,7 +338,7 @@ class GUItk(object):
 
     def create_msg_widget(self, msg):
         # -------------------- the msg widget ----------------------------
-        self.messageWidget = tk.Message(self.boxRoot, width="4.5i", text=msg)
+        self.messageWidget = tk.Message(self.boxRoot, width="4.5i", text=msg) #TODO ??
         self.messageWidget.configure(
             font=(global_state.PROPORTIONAL_FONT_FAMILY, global_state.PROPORTIONAL_FONT_SIZE))
         self.messageWidget.pack(
@@ -358,7 +360,7 @@ class GUItk(object):
             labelWidget = tk.Label(entryFrame, text=name)
             labelWidget.pack(side=tk.LEFT)
 
-            entryWidget = tk.Entry(entryFrame, width=40, highlightthickness=2)
+            entryWidget = ttk.Entry(entryFrame, width=40)
             self.entryWidgets.append(entryWidget)
             entryWidget.configure(
                 font=(global_state.PROPORTIONAL_FONT_FAMILY, global_state.TEXT_ENTRY_FONT_SIZE))
@@ -390,7 +392,7 @@ class GUItk(object):
 
     def create_ok_button(self):
 
-        okButton = tk.Button(self.buttonsFrame, takefocus=1, text="OK")
+        okButton = ttk.Button(self.buttonsFrame, takefocus=1, text="OK")
         self.bindArrows(okButton)
         okButton.pack(expand=1, side=tk.LEFT, padx='3m', pady='3m',
                       ipadx='2m', ipady='1m')
@@ -404,7 +406,7 @@ class GUItk(object):
 
     def create_cancel_button(self):
 
-        cancelButton = tk.Button(self.buttonsFrame, takefocus=1, text="Cancel")
+        cancelButton = ttk.Button(self.buttonsFrame, takefocus=1, text="Cancel")
         self.bindArrows(cancelButton)
         cancelButton.pack(expand=1, side=tk.LEFT, padx='3m', pady='3m',
                           ipadx='2m', ipady='1m')

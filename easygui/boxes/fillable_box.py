@@ -10,9 +10,11 @@ except (SystemError, ValueError, ImportError):
 try:
     import tkinter as tk  # python 3
     import tkinter.font as tk_Font
+    from tkinter import ttk
 except:
     import Tkinter as tk  # python 2
     import tkFont as tk_Font
+    import ttk
 
 # TODO: bindArrows seems to be in the wrong place.
 
@@ -87,14 +89,14 @@ def __fillablebox(msg, title="", default="", mask=None, image=None, root=None):
     buttonsFrame.pack(side=tk.TOP, fill=tk.BOTH)
 
     # -------------------- the msg widget ----------------------------
-    messageWidget = tk.Message(messageFrame, width="4.5i", text=msg)
+    messageWidget = tk.Message(messageFrame, width="4.5i", text=msg) #TODO ??
     messageWidget.configure(
         font=(global_state.PROPORTIONAL_FONT_FAMILY, global_state.PROPORTIONAL_FONT_SIZE))
     messageWidget.pack(
         side=tk.RIGHT, expand=1, fill=tk.BOTH, padx='3m', pady='3m')
 
     # --------- entryWidget ----------------------------------------------
-    entryWidget = tk.Entry(entryFrame, width=40)
+    entryWidget = ttk.Entry(entryFrame, width=40)
     bindArrows(entryWidget)
     entryWidget.configure(
         font=(global_state.PROPORTIONAL_FONT_FAMILY, global_state.TEXT_ENTRY_FONT_SIZE))
@@ -107,7 +109,7 @@ def __fillablebox(msg, title="", default="", mask=None, image=None, root=None):
     entryWidget.insert(0, __enterboxDefaultText)
 
     # ------------------ ok button -------------------------------
-    okButton = tk.Button(buttonsFrame, takefocus=1, text="OK")
+    okButton = ttk.Button(buttonsFrame, takefocus=1, text="OK")
     bindArrows(okButton)
     okButton.pack(
         expand=1, side=tk.LEFT, padx='3m', pady='3m', ipadx='2m', ipady='1m')
@@ -120,7 +122,7 @@ def __fillablebox(msg, title="", default="", mask=None, image=None, root=None):
         commandButton.bind("<{}>".format(selectionEvent), handler)
 
     # ------------------ cancel button -------------------------------
-    cancelButton = tk.Button(buttonsFrame, takefocus=1, text="Cancel")
+    cancelButton = ttk.Button(buttonsFrame, takefocus=1, text="Cancel")
     bindArrows(cancelButton)
     cancelButton.pack(
         expand=1, side=tk.RIGHT, padx='3m', pady='3m', ipadx='2m', ipady='1m')

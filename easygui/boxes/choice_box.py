@@ -16,9 +16,11 @@ except (SystemError, ValueError, ImportError):
 try:
     import tkinter as tk  # python 3
     import tkinter.font as tk_Font
+    from tkinter import ttk
 except:
     import Tkinter as tk  # python 2
     import tkFont as tk_Font
+    import ttk
 
 
 def choicebox(msg="Pick an item", title="", choices=None, preselect=0,
@@ -214,7 +216,7 @@ class GUItk(object):
 
         self.boxRoot = tk.Tk()
 
-        self.boxFont = tk_Font.nametofont("TkTextFont")
+        self.boxFont = tk_Font.nametofont("TkDefaultFont")
 
         self.config_root(title)
 
@@ -356,6 +358,7 @@ class GUItk(object):
             pady=(global_state.default_hpad_in_chars *
                   self.calc_character_width()),
             wrap=tk.WORD,
+            font="TkDefaultFont"
 
         )
         self.set_msg(msg)
@@ -371,7 +374,7 @@ class GUItk(object):
 
         lines_to_show = min(len(self.choices), 20)
 
-        # --------  put the self.choiceboxWidget in the self.choiceboxFrame ---
+        # --------  put the self.choiceboxWidget in the self.choiceboxFrame --- #TODO treeview
         self.choiceboxWidget = tk.Listbox(self.choiceboxFrame,
                                           height=lines_to_show,
                                           borderwidth="1m", relief="flat",
@@ -385,12 +388,12 @@ class GUItk(object):
         #                                      global_state.PROPORTIONAL_FONT_SIZE))
 
         # add a vertical scrollbar to the frame
-        rightScrollbar = tk.Scrollbar(self.choiceboxFrame, orient=tk.VERTICAL,
+        rightScrollbar = ttk.Scrollbar(self.choiceboxFrame, orient=tk.VERTICAL,
                                       command=self.choiceboxWidget.yview)
         self.choiceboxWidget.configure(yscrollcommand=rightScrollbar.set)
 
         # add a horizontal scrollbar to the frame
-        bottomScrollbar = tk.Scrollbar(self.choiceboxFrame,
+        bottomScrollbar = ttk.Scrollbar(self.choiceboxFrame,
                                        orient=tk.HORIZONTAL,
                                        command=self.choiceboxWidget.xview)
         self.choiceboxWidget.configure(xscrollcommand=bottomScrollbar.set)
@@ -422,8 +425,8 @@ class GUItk(object):
         self.buttonsFrame.pack(side=tk.TOP, expand=tk.YES, pady=0)
 
         # put the buttons in the self.buttonsFrame
-        okButton = tk.Button(self.buttonsFrame, takefocus=tk.YES,
-                             text="OK", height=1, width=6)
+        okButton = ttk.Button(self.buttonsFrame, takefocus=tk.YES,
+                             text="OK", width=6)
         bindArrows(okButton)
         okButton.pack(expand=tk.NO, side=tk.RIGHT, padx='2m', pady='1m',
                       ipady="1m", ipadx="2m")
@@ -434,8 +437,8 @@ class GUItk(object):
         okButton.bind("<space>", self.ok_pressed)
 
     def create_cancel_button(self):
-        cancelButton = tk.Button(self.buttonsFrame, takefocus=tk.YES,
-                                 text="Cancel", height=1, width=6)
+        cancelButton = ttk.Button(self.buttonsFrame, takefocus=tk.YES,
+                                 text="Cancel", width=6)
         bindArrows(cancelButton)
         cancelButton.pack(expand=tk.NO, side=tk.LEFT, padx='2m', pady='1m',
                           ipady="1m", ipadx="2m")
@@ -450,14 +453,14 @@ class GUItk(object):
         if not self.multiple_select:
             return
 
-        selectAllButton = tk.Button(
-            self.buttonsFrame, text="Select All", height=1, width=6)
+        selectAllButton = ttk.Button(
+            self.buttonsFrame, text="Select All", width=6)
         selectAllButton.pack(expand=tk.NO, side=tk.LEFT, padx='2m',
                              pady='1m',
                              ipady="1m", ipadx="2m")
 
-        clearAllButton = tk.Button(self.buttonsFrame, text="Clear All",
-                                   height=1, width=6)
+        clearAllButton = ttk.Button(self.buttonsFrame, text="Clear All",
+                                   width=6)
         clearAllButton.pack(expand=tk.NO, side=tk.LEFT,
                             padx='2m', pady='1m',
                             ipady="1m", ipadx="2m")

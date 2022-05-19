@@ -22,9 +22,11 @@ except (SystemError, ValueError, ImportError):
 try:
     import tkinter as tk  # python 3
     import tkinter.font as tk_Font
+    from tkinter import ttk
 except (SystemError, ValueError, ImportError):
     import Tkinter as tk  # python 2
     import tkFont as tk_Font
+    import ttk
 
 
 def demo_buttonbox_1():
@@ -265,7 +267,7 @@ class GUItk(object):
         #     family=global_state.PROPORTIONAL_FONT_FAMILY,
         #     size=global_state.PROPORTIONAL_FONT_SIZE)
 
-        self.boxFont = tk_Font.nametofont("TkFixedFont")
+        self.boxFont = tk_Font.nametofont("TkDefaultFont")
         self.width_in_chars = global_state.fixw_font_line_length
 
         # default_font.configure(size=global_state.PROPORTIONAL_FONT_SIZE)
@@ -414,6 +416,7 @@ class GUItk(object):
             pady=global_state.default_hpad_in_chars *
             self.calc_character_width(),
             wrap=tk.WORD,
+            font="TkDefaultFont"
         )
         self.set_msg(msg)
         self.messageArea.grid(row=0)
@@ -455,7 +458,7 @@ class GUItk(object):
                 except Exception as e:
                     print(e)
                     this_image['tk_image'] = None
-                this_image['widget'] = tk.Button(
+                this_image['widget'] = ttk.Button(
                     self.imagesFrame,
                     takefocus=1,
                     compound=tk.TOP)
@@ -483,7 +486,7 @@ class GUItk(object):
             this_button = dict()
             this_button['original_text'] = button_text
             this_button['clean_text'], this_button['hotkey'], hotkey_position = ut.parse_hotkey(button_text)
-            this_button['widget'] = tk.Button(
+            this_button['widget'] = ttk.Button(
                     self.buttonsFrame,
                     takefocus=1,
                     text=this_button['clean_text'],
